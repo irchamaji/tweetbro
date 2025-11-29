@@ -99,66 +99,7 @@ extension/
 1. Clone the repository
 2. Make changes to the files in the `extension/` folder
 3. Reload the extension in `chrome://extensions/`
-4. Test on twitter.com or x.com
+4. Test on x.com
 
 ### Building for Production
 The extension is ready to use as-is. No build process required.
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how to get started:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes
-4. Test thoroughly on Twitter/X
-5. Submit a pull request
-
-### Areas for Contribution
-- Additional reply styles
-- Support for more languages
-- UI/UX improvements
-- Performance optimizations
-- Bug fixes
-
-## 📋 Requirements
-
-- **Browser**: Chrome 88+ (Manifest V3 support)
-- **API**: OpenAI API key (GPT-3.5-turbo or GPT-4 recommended)
-- **Permissions**: Active tab access, Storage, Clipboard write
-
-## 🐛 Troubleshooting
-
-### Extension not working?
-- Make sure you're on twitter.com or x.com
-- Check that your API key is saved correctly
-- Try refreshing the Twitter page
-
-### API errors?
-- Verify your OpenAI API key is valid and has credits
-- Check your internet connection
-- Try again in a few minutes (rate limiting)
-
-### Button not appearing?
-- Make sure you're hovering over actual tweets
-- Try refreshing the page
-- Check if Twitter's UI has changed (may need updates)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- OpenAI for providing the GPT API
-- Chrome Extensions documentation
-- The open-source community
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/x-reply-assistant/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/x-reply-assistant/discussions)
-
----
-
-**Made with ❤️ for the global Twitter community**
