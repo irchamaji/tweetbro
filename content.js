@@ -32,10 +32,18 @@ function createModal(tweet, tweetText, userName) {
   modal.style.position = 'fixed';
   modal.style.top = `${tweetRect.top}px`;
   modal.style.left = `${tweetRect.right + 20}px`;
+  modal.style.opacity = '0';
+  modal.style.transform = 'scale(0.9)';
   
   // Close modal handler
   const closeBtn = modal.querySelector('.modal-close');
   closeBtn.addEventListener('click', () => {
+    anime({
+      targets: closeBtn,
+      rotate: 90,
+      duration: 150,
+      easing: 'easeOutQuad'
+    });
     closeModal(modal);
   });
   
@@ -84,6 +92,17 @@ function createModal(tweet, tweetText, userName) {
     }
   });
   
+  document.body.appendChild(modal);
+  
+  // Animate modal in
+  anime({
+    targets: modal,
+    opacity: [0, 1],
+    scale: [0.9, 1],
+    duration: 250,
+    easing: 'easeOutQuad'
+  });
+  
   return modal;
 }
 
@@ -101,6 +120,8 @@ function displayReplies(modal, replies) {
   replies.forEach((reply, index) => {
     const replyCard = document.createElement('div');
     replyCard.className = 'reply-card';
+    replyCard.style.opacity = '0';
+    replyCard.style.transform = 'translateY(10px)';
     
     replyCard.innerHTML = `
       <div class="reply-header">
@@ -127,6 +148,12 @@ function displayReplies(modal, replies) {
           </svg>
           Copied!
         `;
+        anime({
+          targets: copyBtn,
+          scale: [1, 1.1, 1],
+          duration: 300,
+          easing: 'easeOutQuad'
+        });
         setTimeout(() => {
           copyBtn.innerHTML = `
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -145,11 +172,28 @@ function displayReplies(modal, replies) {
   });
   
   modalBody.appendChild(repliesContainer);
+  
+  // Animate cards in
+  anime({
+    targets: repliesContainer.querySelectorAll('.reply-card'),
+    opacity: [0, 1],
+    translateY: [10, 0],
+    delay: anime.stagger(50),
+    duration: 300,
+    easing: 'easeOutQuad'
+  });
 }
 
 // Close and remove modal
-function closeModal(modal) {
+async function closeModal(modal) {
   if (modal && modal.parentNode) {
+    await anime({
+      targets: modal,
+      opacity: 0,
+      scale: 0.9,
+      duration: 200,
+      easing: 'easeInQuad'
+    }).finished;
     modal.remove();
     activeModal = null;
   }
@@ -175,6 +219,7 @@ function createAnalyzeButton() {
     <span>Rep</span>
   `;
   button.style.opacity = '0';
+  button.style.transform = 'translateY(5px)';
   return button;
 }
 
@@ -204,17 +249,37 @@ function addButtonToTweet(tweet) {
   
   // Show button on tweet hover
   tweet.addEventListener('mouseenter', () => {
-    button.style.opacity = '1';
+    anime({
+      targets: button,
+      opacity: 1,
+      translateY: 0,
+      duration: 200,
+      easing: 'easeOutQuad'
+    });
   });
   
   tweet.addEventListener('mouseleave', () => {
-    button.style.opacity = '0';
+    anime({
+      targets: button,
+      opacity: 0,
+      translateY: 5,
+      duration: 200,
+      easing: 'easeInQuad'
+    });
   });
   
   // Button click handler
   button.addEventListener('click', (e) => {
     e.stopPropagation();
     e.preventDefault();
+    
+    // Animate button click
+    anime({
+      targets: button,
+      scale: [1, 0.95, 1],
+      duration: 150,
+      easing: 'easeOutQuad'
+    });
     
     // Close existing modal if any
     if (activeModal) {
@@ -231,7 +296,6 @@ function addButtonToTweet(tweet) {
     
     // Create and show modal
     const modal = createModal(tweet, tweetText, userName);
-    document.body.appendChild(modal);
     activeModal = modal;
   });
   

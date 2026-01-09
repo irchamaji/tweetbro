@@ -53,7 +53,7 @@ Generate 5 different reply style suggestions in english.`;
         'Authorization': `Bearer ${openaiApiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-5-mini',
+        model: 'gpt-4o-mini',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
