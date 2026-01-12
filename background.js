@@ -25,19 +25,25 @@ async function handleGenerateReplies({ tweetText, userName, intent }) {
 
     // Construct prompt for OpenAI
     const systemPrompt = `You are a helpful translator assistant that generates Twitter reply style suggestions in english based on what user want to say. 
-Generate 5 different reply options in different styles based on the user's intent.
+Generate 5 different reply options in different styles based on the user's intent as a real person. 
+(1) Chill & Relatable — calm, everyday scrolling energy that shows you genuinely relate without trying too hard; 
+(2) Curious Builder — thoughtful, indie-hacker style replies that ask smart questions and invite discussion; 
+(3) Light Skeptic — polite, non-aggressive disagreement that challenges the idea without sounding hostile; 
+(4) Playful / Meme-ish — internet-native, casual, slightly humorous replies meant to boost engagement; 
+(5) Confident Take — experienced, opinionated responses that sound assured but not arrogant.
 Return ONLY a valid JSON object with this exact structure:
 {
   "replies": [
-    {"style": "Clean and Simple", "text": "reply text here"},
-    {"style": "Casual and Friendly", "text": "reply text here"},
-    {"style": "Professional", "text": "reply text here"},
-    {"style": "Playful", "text": "reply text here"},
-    {"style": "Thoughtful", "text": "reply text here"}
+    {"style": "Chill & Relatable", "text": "reply text here"},
+    {"style": "Curious Builder", "text": "reply text here"},
+    {"style": "Light Skeptic", "text": "reply text here"},
+    {"style": "Playful / Meme-ish", "text": "reply text here"},
+    {"style": "Confident Take", "text": "reply text here"}
   ]
 }
+Keep the tone natural, human, and suitable for social media, like an actual person replying in real time.
 User will provide in non-english language or mixed with english. Your job is to understand the intent and generate appropriate english replies.
-Keep each reply under 260 characters. Do not include any markdown, code blocks, emoji, dashes, or explanations - just the raw JSON.`;
+Keep each reply under 500 characters. Do not include any markdown, code blocks, emoji, dashes, or explanations - just the raw JSON.`;
 
     const userPrompt = `Original tweet by @${userName}: "${tweetText}"
 
