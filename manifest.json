@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "X Reply Assistant",
+  "name": "AI Reply Assistant for Threads & Twitter/X",
   "version": "1.0",
-  "description": "AI Assistant to help you translate replies into english on X",
+  "description": "AI-powered reply suggestions for Threads and Twitter/X posts",
   "permissions": [
     "activeTab",
     "storage"
@@ -12,11 +12,15 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "X Reply Assistant Settings"
+    "default_title": "AI Reply Assistant Settings"
   },
   "content_scripts": [
     {
-      "matches": ["https://x.com/*"],
+      "matches": [
+        "https://www.threads.com/*",
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
       "js": ["anime.min.js", "content.js"],
       "css": ["styles.css"],
       "run_at": "document_idle"
@@ -24,7 +28,7 @@
   ],
   "icons": {
     "16": "icon16.png",
-    "48": "icon32.png",
+    "48": "icon48.png",
     "128": "icon128.png"
   }
 }
