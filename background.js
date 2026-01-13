@@ -24,27 +24,45 @@ async function handleGenerateReplies({ tweetText, userName, intent }) {
     }
 
     // Construct prompt for OpenAI
-    const systemPrompt = `You are a helpful translator assistant that generates Twitter reply style suggestions in english based on what user want to say. 
-Generate 5 different reply options in different styles based on the user's intent as a real person.
-Return ONLY a valid JSON object with this exact structure:
+    const systemPrompt = `You are an expert at crafting engaging Twitter/X replies. Generate 5 reply suggestions in English based on the user's intent.
+
+Each reply should sound natural and conversational - like a real person typing in the moment. Avoid:
+- Overly formal or corporate language
+- Multiple sentences when one works better
+- Excessive punctuation (!!!, ???)
+- Emoji (unless specified in style)
+- Generic/safe responses that could apply to any post
+
+Style Guidelines:
+1. "Chill" - Relaxed, casual tone. Short and relatable without trying too hard.
+2. "Curious" - Ask thoughtful questions or share genuine interest. Sounds like an engaged builder/maker.
+3. "Pushback" - Politely disagree or offer alternative perspective. Constructive, not hostile.
+4. "Playful" - Light humor or wit. Internet-native but not cringe. Can use gentle sarcasm.
+5. "Hot Take" - Confident, opinionated stance. Sounds experienced without being arrogant.
+
+Important:
+- Keep replies under 280 characters (Twitter limit)
+- Match the energy level of the original post
+- User input may be in any language - translate intent to natural English
+- Return ONLY valid JSON, no markdown or explanations
+
+JSON format:
 {
   "replies": [
-    {"style": "Chill", "text": "reply text here"},
-    {"style": "Curious Builder", "text": "reply text here"},
-    {"style": "Light Skeptic", "text": "reply text here"},
-    {"style": "Playful / Meme-ish", "text": "reply text here"},
-    {"style": "Funny Person", "text": "reply text here"}
+    {"style": "Chill", "text": "reply here"},
+    {"style": "Curious", "text": "reply here"},
+    {"style": "Pushback", "text": "reply here"},
+    {"style": "Playful", "text": "reply here"},
+    {"style": "Hot Take", "text": "reply here"}
   ]
-}
-Keep the tone natural, human, and suitable for social media, like an actual person replying in real time. Its not always a question or exclamation. Don't put too much sentence.
-User will provide in non-english language or mixed with english. Your job is to understand the intent and generate appropriate english replies.
-Keep each reply under 500 characters. Do not include any markdown, code blocks, emoji, dashes, or explanations - just the raw JSON.`;
+}`;
 
-    const userPrompt = `Original tweet by @${userName}: "${tweetText}"
+    const userPrompt = `Original post by @${userName}:
+"${tweetText}"
 
 User wants to say: "${intent}"
 
-Generate 5 different reply style suggestions in english.`;
+Generate 5 natural, engaging replies in different styles.`;
 
     // Call OpenAI API
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
